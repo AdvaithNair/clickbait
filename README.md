@@ -36,6 +36,10 @@ n 12.20.0
 
 (You can skip the first step if you have n installed already)
 
+Preprocess Data
+
+`Please run preprocess.ipynb or preprocess.py to clean the data for the server`
+
 ## Commands
 
 ### Server
@@ -44,6 +48,28 @@ Run Server
 
 ```
 yarn server
+```
+
+### Server Maintainance
+
+Run the following commands in the server directory
+
+Install Dependencies
+
+```
+pip install -r requirements.txt
+```
+
+Activate Python Environment
+
+```
+source env/bin/activate
+```
+
+Deactivate Python Environment
+
+```
+deactivate
 ```
 
 Runs on localhost:5002

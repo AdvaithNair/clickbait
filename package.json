@@ -4,7 +4,8 @@
     "description": "clickbait app",
     "main": "index.js",
     "scripts": {
-        "server": "cd server && bash run.sh"
+        "server": "cd server && bash run.sh",
+        "process": "cd server/data && python3 preprocess.py"
     },
     "author": "me",
     "license": "ISC"
