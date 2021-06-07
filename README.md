@@ -36,9 +36,15 @@ n 12.20.0
 
 (You can skip the first step if you have n installed already)
 
+Download Data
+
+Please download the `USvideos.csv` from [this link](https://www.kaggle.com/datasnaek/youtube-new?select=USvideos.csv). Rename this file to `raw.csv` and place it in `/server/data`
+
 Preprocess Data
 
-`Please run preprocess.ipynb or preprocess.py to clean the data for the server`
+```
+Please run preprocess.ipynb or preprocess.py to clean the data for the server
+```
 
 ## Commands
 
