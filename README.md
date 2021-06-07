@@ -14,7 +14,7 @@ It utilizes the following technologies:
     -   Flask
     -   SciKit Learn
 
-All code in this repository is constructed using TypeScript (Vue) and Python.
+All code in this repository is constructed using TypeScript (Vue) and Python. Both are built using Docker, so you will need Docker to run Clickbait.
 
 ## Prerequisites
 
@@ -56,6 +56,16 @@ Run Server
 yarn server
 ```
 
+Runs on localhost:5002
+
+Stop Server
+
+When you run the previous command, the last line (before the `✨ Done in xy.zzs.` line) will be a docker_id.
+
+```
+docker stop [docker_id]
+```
+
 ### Server Maintainance
 
 Run the following commands in the server directory
@@ -66,19 +76,11 @@ Install Dependencies
 pip install -r requirements.txt
 ```
 
-Activate Python Environment
-
-```
-source env/bin/activate
-```
-
-Deactivate Python Environment
+Deactivate Python Environment (if active)
 
 ```
 deactivate
 ```
-
-Runs on localhost:5002
 
 NOTE: You probably want to run web and server in two seperate terminals. They use hot reloading.
 
