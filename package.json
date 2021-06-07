@@ -1,0 +1,11 @@
+{
+    "name": "clickbait",
+    "version": "1.0.0",
+    "description": "clickbait app",
+    "main": "index.js",
+    "scripts": {
+        "server": "cd server && bash run.sh"
+    },
+    "author": "me",
+    "license": "ISC"
+}
