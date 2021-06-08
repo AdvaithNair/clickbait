@@ -48,6 +48,14 @@ Please run preprocess.ipynb or preprocess.py to clean the data for the server
 
 ## Commands
 
+### Web
+
+Run Web (Developer Mode)
+
+```
+yarn web
+```
+
 ### Server
 
 Run Server

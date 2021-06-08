@@ -4,6 +4,7 @@
     "description": "clickbait app",
     "main": "index.js",
     "scripts": {
+        "web": "yarn --cwd web dev",
         "server": "cd server && bash run.sh",
         "process": "cd server/data && python3 preprocess.py"
     },
