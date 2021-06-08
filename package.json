@@ -8,6 +8,7 @@
         "web:build": "yarn --cwd web docker",
         "web:run": "yarn --cwd web docker:run",
         "server": "cd server && bash run.sh",
+        "server:build": "cd server && bash build.sh",
         "process": "cd server/data && python3 preprocess.py"
     },
     "author": "me",

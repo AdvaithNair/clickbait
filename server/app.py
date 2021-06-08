@@ -1,6 +1,14 @@
 from flask import Flask
+from flask_cors import CORS
+# import server.routes.user as user
 
 app = Flask(__name__)
+# CORS(app)
+
+@app.route('/user')
+def user_hello():
+    # user.hello_user()
+    return "x";
 
 @app.route('/')
 def hello():

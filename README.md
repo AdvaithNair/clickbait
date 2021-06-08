@@ -78,7 +78,15 @@ docker stop [docker_id]
 
 Run the following commands in the server directory
 
-Install Dependencies
+Install New Dependencies
+
+```
+source env/bin/activate
+pip install [dependency]
+pip freeze > requirements.txt
+```
+
+Install All Dependencies
 
 ```
 pip install -r requirements.txt
