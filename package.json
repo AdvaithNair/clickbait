@@ -5,6 +5,8 @@
     "main": "index.js",
     "scripts": {
         "web": "yarn --cwd web dev",
+        "web:build": "yarn --cwd web docker",
+        "web:run": "yarn --cwd web docker:run",
         "server": "cd server && bash run.sh",
         "process": "cd server/data && python3 preprocess.py"
     },
