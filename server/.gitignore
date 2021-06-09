@@ -1,2 +1,6 @@
 /data/raw.csv
 /data/processed.csv
+/__pycache__
+/utils/__pycache__
+/utils/secrets.py
+/env

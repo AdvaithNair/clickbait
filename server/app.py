@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
+import utils.secrets as secrets
 # import server.routes.user as user
 
 app = Flask(__name__)
@@ -12,7 +13,7 @@ def user_hello():
 
 @app.route('/')
 def hello():
-    return "Hello"
+    return secrets.MONGODB_URL
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5002, debug=True)
