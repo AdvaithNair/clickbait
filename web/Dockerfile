@@ -11,9 +11,9 @@ COPY . ./
 RUN yarn
 
 # Prepare for Build
-EXPOSE 8080
+EXPOSE 3000
 ENV HOST=0.0.0.0
-ENV PORT=8080
+ENV PORT=3000
 
 # Build and Run Web
 RUN yarn build
