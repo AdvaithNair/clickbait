@@ -8,19 +8,28 @@ def get_data():
     # Get Data for Processing
     data = pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/processed.csv'))
     data['title'] = data['title'].str.lower()
-    print(data)
     return data
 
+def combine_tags_and_channel(data):
+    # Drop Unnecessary Columns
+    combined_data = data.drop(columns=['video_id', 'title', 'publish_time', 'views', 'likes', 'dislikes', 'comment_count', 'thumbnail_link', 'description'])
+    
+    # Combine Tags Array and Channel Title String
+    combined_data['combined'] = combined_data[combined_data.columns[1:3]].apply(lambda x: ','.join(x.dropna().astype(str)),axis=1)
 
-def transform_data(data):
+    # Drop Non-Combined Columns for Combined as Output 
+    combined_data = combined_data.drop(columns=['tags','channel_title'])
+    return combined_data
+
+def transform_data(combined, data):
     # Create Bag of Words Matrix for Tags
     count = CountVectorizer(stop_words='english')
-    count_matrix = count.fit_transform(data['tags'])
+    count_matrix = count.fit_transform(combined['combined'])
 
     # Create TFIDF Matrix for Description
     # Use TFIDF since description words appearing less is more
     tfidf = TfidfVectorizer(stop_words='english')
-    tfidf_matrix = tfidf.fit_transform(data['description'])
+    tfidf_matrix = tfidf.fit_transform(data['description'].values.astype('U'))
 
     # Run Cosine Similarity on Sparse Matrix
     combine_sparse = sp.hstack([count_matrix, tfidf_matrix], format='csr')
@@ -50,7 +59,7 @@ def recommend_videos(video_id, data, transform, num_recs = 20):
     video_tags = data['tags'].iloc[recommended_indices]
     video_channel = data['channel_title'].iloc[recommended_indices]
     video_time = data['publish_time'].iloc[recommended_indices]
-    video_thumbnail = data['thumbnail_image'].iloc[recommended_indices]
+    video_thumbnail = data['thumbnail_link'].iloc[recommended_indices]
     video_description = data['description'].iloc[recommended_indices]
 
     # Throw Data into DataFrame to return
@@ -64,10 +73,12 @@ def recommend_videos(video_id, data, transform, num_recs = 20):
     recommended_data['description'] = video_description
     return recommended_data
 
+
 def results(video_id):
     # Prepare Data
     video_data = get_data()
-    transform_video_data = transform_data(video_data)
+    combined_video_data = combine_tags_and_channel(video_data)
+    transform_video_data = transform_data(combined_video_data, video_data)
     
     # Validate Entry in Database
     # TODO: Could likely remove this check, inefficient once API is complete
