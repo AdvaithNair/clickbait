@@ -1,14 +1,11 @@
 <template>
     <div class="preview">
         <div class="thumbnail">
-            <img :src="video.thumbnail" v-bind:alt="picture" />
+            <img :src="video.thumbnail" alt="picture" />
         </div>
         <p class="title">{{ video.title }}</p>
         <p class="channel">{{ video.channel }}</p>
-        <div class="info">
-            <span>{{ video.views }}</span>
-            <span>{{ video.date }}</span>
-        </div>
+        <p class="info">{{ video.views }} views • {{ video.date }}</p>
     </div>
 </template>
 
@@ -16,19 +13,21 @@
 import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
 import { LightVideo } from '../../../utils/types';
+import { defaultLightVideo as defaultVideo } from '../../../utils/defaults';
 
 const PreviewVideoSettings = Vue.extend({
     name: 'PreviewVideo',
     props: {
-        video: Object as PropType<LightVideo>,
+        video: {
+            type: Object as PropType<LightVideo>,
+            default: { ...defaultVideo, date: 'just now' },
+        },
     },
 });
 
 @Component
 export default class PreviewVideo extends PreviewVideoSettings {
     mounted() {
-        this.video.thumbnail = `https://i.ytimg.com/vi/${this.video.id}/hqdefault.jpg`;
-        // this.video.views =
         console.log(this.video);
     }
 }
@@ -57,11 +56,18 @@ export default class PreviewVideo extends PreviewVideoSettings {
     transform: translate(-50%, -50%);
 }
 
-.title {
+.title,
+.channel,
+.info {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     width: 100%;
+}
+
+.title {
+    color: black;
+    margin-top: 5px;
 }
 
 .channel,
