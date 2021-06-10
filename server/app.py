@@ -25,7 +25,6 @@ def hello_user():
 def recommend():
     # video_id = request.args.get('id')
     video_id = '2kyS6SvSYSE'
-    print('Hit Here!!!')
     res = recommender.results(video_id)
     return jsonify(res)
 

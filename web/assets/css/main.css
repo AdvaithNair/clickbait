@@ -1,0 +1,94 @@
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/cd99aa44944ccda068a4efecbce6dcf3/TruenoBlackItalic.otf') format('opentype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/d8f492a668162b9db8250f8f154078a1/TruenoBold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/bf835d0c5d75bcea06bbc38eae005783/TruenoBoldItalic.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/6f936c9b77268d67cdc76dcf94da2bcd/TruenoExtraBold.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/3eec0e169fe72519b7af7f6dddea265e/TruenoExtraBoldItalic.otf') format('opentype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/e5a66b560e95611395f22797b5e02df9/TruenoLight.otf') format('opentype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/138169115ca282f0e8c8b59b276b312b/TruenoLightItalic.otf') format('opentype');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/6e3567c1458919d6a6c29e387315297e/TruenoRegular.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/bf269fe3dee7660218bf77401d93c91f/TruenoRegularItalic.otf') format('opentype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/d6f8e7ffae4184522e99045999732801/TruenoSemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/9bbf217ee59e8a69cb385656bfb8adf2/TruenoSemiBoldItalic.otf') format('opentype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/63e1f93c5806c45b6760c4d1c2610090/TruenoUltraLight.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trueno';
+    src: url('https://fontlibrary.org/face/trueno/assets/fonts/trueno/f6125819e866b78711583d68298888ac/fe6d0cd1e2509d7007284ab48479e57e/TruenoUltraLightItalic.otf') format('opentype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+body {
+    font-family: "Trueno", Helvetica, Arial, sans-serif;
+}

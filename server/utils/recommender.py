@@ -7,7 +7,6 @@ import os
 def get_data():
     # Get Data for Processing
     data = pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/processed.csv'))
-    data['title'] = data['title'].str.lower()
     return data
 
 def combine_tags_and_channel(data):
