@@ -3,4 +3,5 @@
 /__pycache__
 /utils/__pycache__
 /utils/secrets.py
+/routes/__pycache__
 /env

@@ -36,6 +36,15 @@ n 12.20.0
 
 (You can skip the first step if you have n installed already)
 
+Set Up Virtual Environment
+
+```
+cd server
+virtualenv -p python3 env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
 Download Data
 
 Please download the `USvideos.csv` from [this link](https://www.kaggle.com/datasnaek/youtube-new?select=USvideos.csv). Rename this file to `raw.csv` and place it in `/server/data`
