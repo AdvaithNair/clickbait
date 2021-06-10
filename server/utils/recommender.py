@@ -6,8 +6,7 @@ import os
 
 def get_data():
     # Get Data for Processing
-    data = pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/processed.csv'))
-    return data
+    return pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/processed.csv'))
 
 def combine_tags_and_channel(data):
     # Drop Unnecessary Columns
@@ -60,9 +59,10 @@ def recommend_videos(video_id, data, transform, num_recs = 20):
     video_time = data['publish_time'].iloc[recommended_indices]
     video_thumbnail = data['thumbnail_link'].iloc[recommended_indices]
     video_description = data['description'].iloc[recommended_indices]
+    video_views = data['views'].iloc[recommended_indices]
 
     # Throw Data into DataFrame to return
-    recommended_data = pd.DataFrame(columns=['id','title','tags', 'channel', 'date', 'thumbnail', 'description'])
+    recommended_data = pd.DataFrame(columns=['id','title','tags', 'channel', 'date', 'thumbnail', 'description', 'views'])
     recommended_data['id'] = video_id
     recommended_data['title'] = video_title
     recommended_data['tags'] = video_tags
@@ -70,6 +70,7 @@ def recommend_videos(video_id, data, transform, num_recs = 20):
     recommended_data['date'] = video_time
     recommended_data['thumbnail'] = video_thumbnail
     recommended_data['description'] = video_description
+    recommended_views['views'] = video_views
     return recommended_data
 
 
@@ -87,3 +88,24 @@ def results(video_id):
     else:
         recommendations = recommend_videos(video_id, video_data, transform_video_data, 10)
         return recommendations.to_dict('records')
+
+
+def format_data(data):
+    data = data.rename(columns={"video_id": "id", "channel_title": "channel", "publish_time": "date", "thumbnail_link": "thumbnail"})
+    data = data.drop(columns=["dislikes", "likes", "comment_count"])
+    data = data.iloc[:,1:]
+    return data.to_dict('records')
+
+
+def format_light_data(data):
+    data = data.rename(columns={"video_id": "id", "channel_title": "channel", "publish_time": "date", "thumbnail_link": "thumbnail"})
+    data = data.drop(columns=["dislikes", "likes", "comment_count", "tags", "description"])
+    data = data.iloc[:,1:]
+    return data.to_dict('records')
+
+
+def get_random(num = 8):
+    data = get_data()
+    data = data.sample(n = num)
+    return format_light_data(data)
+    

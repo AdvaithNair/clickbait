@@ -28,5 +28,10 @@ def recommend():
     res = recommender.results(video_id)
     return jsonify(res)
 
+@app.route('/videos/random', methods=['GET'])
+def random_recommend():
+    res = recommender.get_random()
+    return jsonify(res)
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5002, debug=True)
