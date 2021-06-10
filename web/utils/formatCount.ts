@@ -9,9 +9,7 @@ const toFixedAbsolute = (value: number) => {
 };
 
 export const formatCount = (count: number) => {
-    if (count > 999 && count < 10000)
-        return count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    else if (count >= 10000 && count < 1000000)
+    if (count > 999 && count < 1000000)
         return toFixedAbsolute(count / 1000) + 'K';
     else if (count >= 1000000 && count < 1000000000)
         return toFixedAbsolute(count / 1000000) + 'M';

@@ -33,9 +33,9 @@ export default class PreviewVideo extends PreviewVideoSettings {
 }
 </script>
 
-<style>
+<style scoped>
 .preview {
-    width: 20%;
+    width: 100%;
     padding: 10px 20px;
 }
 

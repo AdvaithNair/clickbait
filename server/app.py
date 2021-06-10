@@ -21,7 +21,7 @@ def hello_user():
     print('Here')
     return "MAIN Hello"
 
-@app.route('/rec', methods=['GET'])
+@app.route('/videos/recommend', methods=['GET'])
 def recommend():
     # video_id = request.args.get('id')
     video_id = '2kyS6SvSYSE'

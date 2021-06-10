@@ -70,7 +70,7 @@ def recommend_videos(video_id, data, transform, num_recs = 20):
     recommended_data['date'] = video_time
     recommended_data['thumbnail'] = video_thumbnail
     recommended_data['description'] = video_description
-    recommended_views['views'] = video_views
+    recommended_data['views'] = video_views
     return recommended_data
 
 

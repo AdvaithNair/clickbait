@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header />
-        <PreviewVideo v-bind:video="video" />
+        <PreviewGrid v-bind:videos="videos" />
     </div>
 </template>
 
@@ -11,6 +11,7 @@ import Component from 'vue-class-component';
 import axios from '../utils/axios';
 import Header from '../components/General/Header.vue';
 import PreviewVideo from '../components/Video/Preview/PreviewVideo.vue';
+import PreviewGrid from '../components/Video/Preview/PreviewGrid.vue';
 import { LightVideo } from '../utils/types';
 import { formatCount } from '../utils/formatCount';
 import { formatRelative } from '../utils/time';
@@ -21,12 +22,13 @@ const IndexSettings = Vue.extend({
     components: {
         Header,
         PreviewVideo,
+        PreviewGrid,
     },
 });
 
 @Component
 export default class Index extends IndexSettings {
-    videos: Array<LightVideo | undefined> = new Array(6).fill(undefined);
+    videos: Array<LightVideo | undefined> = new Array(8).fill(undefined);
     video: LightVideo | undefined = defaultLightVideo;
 
     async mounted() {
