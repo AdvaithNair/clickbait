@@ -3,6 +3,7 @@ import scipy.sparse as sp
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import os
+import ast
 
 def get_data():
     # Get Data for Processing
@@ -93,6 +94,7 @@ def results(video_id, count):
 def format_data(data):
     data = data.rename(columns={"video_id": "id", "channel_title": "channel", "publish_time": "date", "thumbnail_link": "thumbnail"})
     data = data.drop(columns=["dislikes", "likes", "comment_count"])
+    data['tags'] = data['tags'].apply(literal_return)
     data = data.iloc[:,1:]
     return data.to_dict('records')
 
@@ -114,3 +116,9 @@ def get_video(id):
     data = get_data()
     video = data.loc[data['video_id'] == id]
     return format_data(video)
+
+def literal_return(val):
+    try:
+        return ast.literal_eval(val)
+    except (ValueError, SyntaxError) as e:
+        return val

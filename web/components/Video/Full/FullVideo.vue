@@ -4,6 +4,10 @@
         <h1 class="title">{{ video.title }}</h1>
         <h2 class="channel">{{ video.channel }}</h2>
         <p class="info">{{ video.views }} views • {{ video.date }}</p>
+        <p class="description">{{ video.description }}</p>
+        <div class="tags" v-for="(item, index) in video.tags" :key="index">
+            <p class="tag">{{ item }}</p>
+        </div>
     </div>
 </template>
 
@@ -83,5 +87,28 @@ export default class FullVideo extends FullVideoSettings {}
 .info {
     color: #bbb;
     font-size: 16px;
+}
+
+.description {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.tags {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-flow: wrap;
+    margin-top: 10px;
+}
+
+.tag {
+    background: #ef6e26;
+    color: white;
+    font-weight: 400;
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 20px;
 }
 </style>
