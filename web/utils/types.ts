@@ -10,4 +10,5 @@ export interface LightVideo {
 export interface Video extends LightVideo {
     description: string;
     tags: Array<string>;
+    src: string;
 }

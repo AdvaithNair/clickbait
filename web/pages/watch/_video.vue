@@ -41,11 +41,14 @@ export default class Watch extends WatchSettings {
             });
 
             // Video Does Not Exist
-            if (!vid.data[0]) redirect('/LOL');
+            const videoData = vid.data[0];
+            if (!videoData) redirect('/LOL');
 
-            formatVideo(vid.data[0]);
+            formatVideo(videoData);
 
-            return { video: vid.data[0] };
+            videoData.src = `https://www.youtube.com/watch?v=${videoData.id}`;
+
+            return { video: videoData };
         }
     }
 

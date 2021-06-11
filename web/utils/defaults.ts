@@ -14,4 +14,5 @@ export const defaultVideo: Video = {
     ...defaultLightVideo,
     description: 'Loading...',
     tags: [],
+    src: '',
 };

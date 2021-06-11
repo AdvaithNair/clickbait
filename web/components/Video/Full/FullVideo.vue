@@ -1,8 +1,6 @@
 <template>
     <div class="preview">
-        <div class="thumbnail">
-            <img :src="video.thumbnail" alt="picture" />
-        </div>
+        <YouTube v-bind:videoId="video.id" />
         <h1 class="title">{{ video.title }}</h1>
         <h2 class="channel">{{ video.channel }}</h2>
         <p class="info">{{ video.views }} views • {{ video.date }}</p>
@@ -14,6 +12,7 @@ import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
 import { Video } from '../../../utils/types';
 import { defaultVideo } from '../../../utils/defaults';
+import YouTube from '../YouTube/YouTube.vue';
 
 const FullVideoSettings = Vue.extend({
     name: 'FullVideo',
@@ -24,6 +23,9 @@ const FullVideoSettings = Vue.extend({
                 return { ...defaultVideo, date: 'just now' };
             },
         },
+    },
+    components: {
+        YouTube,
     },
 });
 
