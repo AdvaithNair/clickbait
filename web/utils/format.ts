@@ -1,3 +1,6 @@
+import { formatRelative } from './time';
+import { LightVideo } from './types';
+
 const toFixedAbsolute = (value: number) => {
     const n = 1;
     const reg = new RegExp('^-?\\d+(?:\\.\\d{0,' + n + '})?', 'g');
@@ -16,4 +19,16 @@ export const formatCount = (count: number) => {
     else if (count >= 1000000000)
         return toFixedAbsolute(count / 1000000000) + 'B';
     else return count.toString();
+};
+
+export const formatVideo = (item: LightVideo) => {
+    item.thumbnail = `https://i.ytimg.com/vi/${item.id}/hqdefault.jpg`;
+    item.views = formatCount(item.views ?? 0) as any;
+    item.date = formatRelative(item.date);
+};
+
+export const formatVideoArray = (array: Array<LightVideo>) => {
+    for (const item of array) {
+        formatVideo(item);
+    }
 };

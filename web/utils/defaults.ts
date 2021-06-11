@@ -1,3 +1,5 @@
+import { Video } from './types';
+
 export const defaultLightVideo = {
     id: '',
     views: 0,
@@ -6,4 +8,10 @@ export const defaultLightVideo = {
     date: new Date().toString(),
     title: 'Loading...',
     channel: 'Loading...',
+};
+
+export const defaultVideo: Video = {
+    ...defaultLightVideo,
+    description: 'Loading...',
+    tags: [],
 };

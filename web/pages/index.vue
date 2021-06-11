@@ -12,7 +12,7 @@ import axios from '../utils/axios';
 import Header from '../components/General/Header.vue';
 import PreviewVideo from '../components/Video/Preview/PreviewVideo.vue';
 import PreviewGrid from '../components/Video/Preview/PreviewGrid.vue';
-import { formatCount } from '../utils/formatCount';
+import { formatCount, formatVideoArray } from '../utils/format';
 import { formatRelative } from '../utils/time';
 
 const IndexSettings = Vue.extend({
@@ -29,12 +29,8 @@ Component.registerHooks(['asyncData', 'head']);
 @Component
 export default class Index extends IndexSettings {
     async asyncData() {
-        const res = await axios.get('/videos/random');
-        for (const item of res.data) {
-            item.thumbnail = `https://i.ytimg.com/vi/${item.id}/hqdefault.jpg`;
-            item.views = formatCount(item.views ?? 0) as any;
-            item.date = formatRelative(item.date);
-        }
+        const res = await axios.get('/api/videos/random');
+        formatVideoArray(res.data);
         return { videos: res.data };
     }
 }

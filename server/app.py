@@ -18,28 +18,29 @@ def hello():
     return secrets.MONGODB_URL
 
 
-@app.route('/user')
+@app.route('/api/user')
 def hello_user():
     print('Here')
     return "MAIN Hello"
 
 
-@app.route('/videos/', methods=['GET'])
+@app.route('/api/videos/', methods=['GET'])
 def get_video():
     video_id = request.args.get('id')
     res = recommender.get_video(video_id)
     return jsonify(res)
 
 
-@app.route('/videos/recommend', methods=['GET'])
+@app.route('/api/videos/recommend', methods=['GET'])
 def recommend():
-    # video_id = request.args.get('id')
-    video_id = '2kyS6SvSYSE'
-    res = recommender.results(video_id)
+    # video_id = '2kyS6SvSYSE'
+    video_id = request.args.get('id')
+    count = int(request.args.get('count'))
+    res = recommender.results(video_id, count)
     return jsonify(res)
 
 
-@app.route('/videos/random', methods=['GET'])
+@app.route('/api/videos/random', methods=['GET'])
 def random_recommend():
     res = recommender.get_random()
     return jsonify(res)

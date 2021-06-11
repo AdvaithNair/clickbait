@@ -74,19 +74,19 @@ def recommend_videos(video_id, data, transform, num_recs = 20):
     return recommended_data
 
 
-def results(video_id):
+def results(video_id, count):
     # Prepare Data
     video_data = get_data()
     combined_video_data = combine_tags_and_channel(video_data)
     transform_video_data = transform_data(combined_video_data, video_data)
     
     # Validate Entry in Database
-    # TODO: Could likely remove this check, inefficient once API is complete
     if video_id not in video_data['video_id'].unique():
-        return 'Video Does Not Exist'
+        return None
     
+    # Recommend
     else:
-        recommendations = recommend_videos(video_id, video_data, transform_video_data, 10)
+        recommendations = recommend_videos(video_id, video_data, transform_video_data, count)
         return recommendations.to_dict('records')
 
 
