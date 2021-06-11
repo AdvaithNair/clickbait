@@ -20,7 +20,9 @@ const PreviewVideoSettings = Vue.extend({
     props: {
         video: {
             type: Object as PropType<LightVideo>,
-            default: { ...defaultVideo, date: 'just now' },
+            default: () => {
+                return { ...defaultVideo, date: 'just now' };
+            },
         },
     },
 });
