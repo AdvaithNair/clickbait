@@ -109,3 +109,8 @@ def get_random(num = 8):
     data = data.sample(n = num)
     return format_light_data(data)
     
+
+def get_video(id):
+    data = get_data()
+    video = data.loc[data['video_id'] == id]
+    return format_data(video)
