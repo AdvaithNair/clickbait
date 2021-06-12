@@ -6,6 +6,7 @@
                 :style="styles.iframe"
                 frameborder="0"
                 allowfullscreen="true"
+                allow="autoplay"
             ></iframe>
         </div>
     </div>
@@ -15,15 +16,19 @@
 export default {
     props: ['maxWidth', 'videoId'],
     computed: {
-        src() {
-            return `https://www.youtube.com/embed/${this.videoId}?autoplay=1`;
+        src(): string {
+            return `https://www.youtube.com/embed/${
+                (this as any).videoId
+            }?autoplay=1`;
         },
     },
-    data() {
+    data(): any {
         return {
             styles: {
                 widthLimitter: {
-                    maxWidth: this.maxWidth ? this.maxWidth : null,
+                    maxWidth: (this as any).maxWidth
+                        ? (this as any).maxWidth
+                        : null,
                 },
                 renderingAreaProvider: {
                     background: '#f0f0f0',

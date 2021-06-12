@@ -30,6 +30,8 @@ Component.registerHooks(['asyncData', 'head']);
 export default class Index extends IndexSettings {
     async asyncData() {
         const res = await axios.get('/api/videos/random');
+        console.log('API');
+        console.log(res.data);
         formatVideoArray(res.data);
         return { videos: res.data };
     }

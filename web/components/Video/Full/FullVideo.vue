@@ -5,8 +5,10 @@
         <h2 class="channel">{{ video.channel }}</h2>
         <p class="info">{{ video.views }} views • {{ video.date }}</p>
         <p class="description">{{ video.description }}</p>
-        <div class="tags" v-for="(item, index) in video.tags" :key="index">
-            <p class="tag">{{ item }}</p>
+        <div class="tags">
+            <div v-for="(item, index) in video.tags" :key="index">
+                <p class="tag">{{ item }}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -41,6 +43,8 @@ export default class FullVideo extends FullVideoSettings {}
 .preview {
     width: 100%;
     padding: 10px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .thumbnail {
@@ -90,6 +94,7 @@ export default class FullVideo extends FullVideoSettings {}
 }
 
 .description {
+    white-space: pre-wrap;
     margin-top: 10px;
     font-size: 14px;
     color: #aaa;
@@ -97,10 +102,10 @@ export default class FullVideo extends FullVideoSettings {}
 
 .tags {
     display: flex;
-    flex-direction: row;
     justify-content: flex-start;
     flex-flow: wrap;
-    margin-top: 10px;
+    flex-direction: row;
+    margin-top: 20px;
 }
 
 .tag {
@@ -110,5 +115,8 @@ export default class FullVideo extends FullVideoSettings {}
     display: flex;
     padding: 5px 15px;
     border-radius: 20px;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 </style>

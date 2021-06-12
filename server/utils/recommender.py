@@ -5,10 +5,23 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import os
 import ast
 
+'''
+Gets Full CSV DataSet
+
+Returns DataFrame of videos dataset
+'''
 def get_data():
     # Get Data for Processing
     return pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/processed.csv'))
 
+
+'''
+Modifies Data for Bag of Words
+
+data: DataFrame of videos dataset
+
+Returns DataFrame with combined column of tags and channel
+'''
 def combine_tags_and_channel(data):
     # Drop Unnecessary Columns
     combined_data = data.drop(columns=['video_id', 'title', 'publish_time', 'views', 'likes', 'dislikes', 'comment_count', 'thumbnail_link', 'description'])
@@ -20,6 +33,15 @@ def combine_tags_and_channel(data):
     combined_data = combined_data.drop(columns=['tags','channel_title'])
     return combined_data
 
+
+'''
+Applies Natural Language Processing to Data
+
+combined: DataFrame with combined column of tags and channel
+data: DataFrame of videos dataset
+
+Returns Cosine Similarity Matrix on all videos
+'''
 def transform_data(combined, data):
     # Create Bag of Words Matrix for Tags
     count = CountVectorizer(stop_words='english')
@@ -36,6 +58,16 @@ def transform_data(combined, data):
     return cosine_sim
 
 
+'''
+Gets Recommended Videos
+
+video_id: ID of video to recommend similar videos to
+data: DataFrame of videos dataset
+transform: Cosine Similarity Matrix on all videos
+num_recs: Number of similar videos to recommend
+
+Returns DataFrame of the most similar videos
+'''
 def recommend_videos(video_id, data, transform, num_recs = 20):
     # Increment Num Recs for Index
     num_recs = num_recs + 1
@@ -53,6 +85,7 @@ def recommend_videos(video_id, data, transform, num_recs = 20):
     recommended_indices = [i[0] for i in sim_scores]
 
     # Grab Data from Indices
+    # TODO: Reduce the number of parameters here
     video_id = data['video_id'].iloc[recommended_indices]
     video_title = data['title'].iloc[recommended_indices]
     video_tags = data['tags'].iloc[recommended_indices]
@@ -74,8 +107,15 @@ def recommend_videos(video_id, data, transform, num_recs = 20):
     recommended_data['views'] = video_views
     return recommended_data
 
+'''
+Formats Recommended Videos
 
-def results(video_id, count):
+video_id: ID of video to recommend similar videos to
+num_recs: Number of similar videos to recommend
+
+Returns Dictionary formatted list of recommended preview videos or None
+'''
+def results(video_id, num_recs):
     # Prepare Data
     video_data = get_data()
     combined_video_data = combine_tags_and_channel(video_data)
@@ -87,38 +127,5 @@ def results(video_id, count):
     
     # Recommend
     else:
-        recommendations = recommend_videos(video_id, video_data, transform_video_data, count)
+        recommendations = recommend_videos(video_id, video_data, transform_video_data, num_recs)
         return recommendations.to_dict('records')
-
-
-def format_data(data):
-    data = data.rename(columns={"video_id": "id", "channel_title": "channel", "publish_time": "date", "thumbnail_link": "thumbnail"})
-    data = data.drop(columns=["dislikes", "likes", "comment_count"])
-    data['tags'] = data['tags'].apply(literal_return)
-    data = data.iloc[:,1:]
-    return data.to_dict('records')
-
-
-def format_light_data(data):
-    data = data.rename(columns={"video_id": "id", "channel_title": "channel", "publish_time": "date", "thumbnail_link": "thumbnail"})
-    data = data.drop(columns=["dislikes", "likes", "comment_count", "tags", "description"])
-    data = data.iloc[:,1:]
-    return data.to_dict('records')
-
-
-def get_random(num = 8):
-    data = get_data()
-    data = data.sample(n = num)
-    return format_light_data(data)
-    
-
-def get_video(id):
-    data = get_data()
-    video = data.loc[data['video_id'] == id]
-    return format_data(video)
-
-def literal_return(val):
-    try:
-        return ast.literal_eval(val)
-    except (ValueError, SyntaxError) as e:
-        return val

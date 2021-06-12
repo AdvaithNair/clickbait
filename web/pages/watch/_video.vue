@@ -17,7 +17,7 @@ import axios from '../../utils/axios';
 import Header from '../../components/General/Header.vue';
 import FullVideo from '../../components/Video/Full/FullVideo.vue';
 import PreviewVideo from '../../components/Video/Preview/PreviewVideo.vue';
-import { formatVideoArray, formatVideo } from '../../utils/format';
+import { formatVideoArray, formatFullVideo } from '../../utils/format';
 import { LightVideo } from '../../utils/types';
 
 const WatchSettings = Vue.extend({
@@ -31,37 +31,52 @@ Component.registerHooks(['asyncData', 'head']);
 export default class Watch extends WatchSettings {
     recommended: Array<LightVideo | undefined> = new Array(4).fill(undefined);
 
-    async asyncData({ params, redirect }) {
-        if ((process as any).server) {
-            if (!params.video) redirect('/');
+    async asyncData({ params, redirect }: { params: any; redirect: Function }) {
+        if (!params.video) redirect('/');
 
-            // Get Video Data
-            const vid = await axios.get('/api/videos/', {
-                params: { id: params.video },
-            });
+        // Get Video Data
+        const vid = await axios.get('/api/videos/', {
+            params: { id: params.video },
+        });
 
-            // Video Does Not Exist
-            const videoData = vid.data[0];
-            if (!videoData) redirect('/LOL');
+        // Video Does Not Exist
+        const videoData = vid.data[0];
+        if (!videoData) redirect('/LOL');
 
-            formatVideo(videoData);
+        console.log(videoData.description);
 
-            videoData.src = `https://www.youtube.com/watch?v=${videoData.id}`;
+        formatFullVideo(videoData);
 
-            return { video: videoData };
-        }
+        console.log(videoData.description);
+        console.log(typeof videoData.description);
+
+        videoData.src = `https://www.youtube.com/watch?v=${videoData.id}`;
+
+        return { video: videoData };
     }
 
     async mounted() {
         console.log('MOUNTED');
-        const id = (this as any).video.id;
-        const recs = await axios.get('/api/videos/recommend', {
-            params: { id, count: 4 },
-        });
+        if (this as any) {
+            const id = (this as any).video.id;
+            const recs = await axios.get('/api/videos/recommend', {
+                params: { id, count: 4 },
+            });
 
-        if (recs.data != null) formatVideoArray(recs.data);
-        else recs.data = new Array(4).fill(undefined);
-        this.recommended = recs.data;
+            if (recs.data != null) formatVideoArray(recs.data);
+            else recs.data = new Array(4).fill(undefined);
+            this.recommended = recs.data;
+        } else {
+            this.recommended = new Array(4).fill(undefined);
+        }
+    }
+
+    head() {
+        return {
+            title: this
+                ? `${(this as any).video.title} - Clickbait`
+                : 'Clickbait',
+        };
     }
 }
 </script>

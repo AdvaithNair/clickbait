@@ -2,23 +2,23 @@
     <div>
         <div class="header">
             <div class="content">
-                <img src="~/assets/img/logo/icon.svg" class="logo" />
-                <h1>clickbait</h1>
+                <NuxtLink to="/">
+                    <img src="~/assets/img/logo/icon.svg" class="logo" />
+                </NuxtLink>
+                <NuxtLink to="/">
+                    <h1>clickbait</h1>
+                </NuxtLink>
             </div>
         </div>
         <div class="under" />
     </div>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style scoped>
 .header {
     background: #ef6e26;
     width: 100%;
-    height: 65px;
+    height: 52px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,7 +42,7 @@ export default {};
 .under {
     background: #fbb03b;
     width: 100%;
-    height: 5px;
+    height: 3px;
 }
 
 .logo {

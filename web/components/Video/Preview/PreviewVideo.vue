@@ -1,8 +1,11 @@
 <template>
     <div class="preview">
-        <div class="thumbnail">
-            <img :src="video.thumbnail" alt="picture" />
-        </div>
+        <NuxtLink v-bind:to="`/watch/${video.id}`">
+            <div class="thumbnail">
+                <img :src="video.thumbnail" alt="picture" />
+            </div>
+        </NuxtLink>
+
         <p class="title">{{ video.title }}</p>
         <p class="channel">{{ video.channel }}</p>
         <p class="info">{{ video.views }} views • {{ video.date }}</p>
@@ -30,7 +33,7 @@ const PreviewVideoSettings = Vue.extend({
 @Component
 export default class PreviewVideo extends PreviewVideoSettings {
     mounted() {
-        console.log(this.video);
+        // console.log(this.video);
     }
 }
 </script>

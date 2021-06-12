@@ -2,6 +2,7 @@ version: '3'
 services:
     web:
         build: './web'
+        command: yarn dev
         ports:
             - '3000:3000'
 

@@ -1,5 +1,5 @@
 import { formatRelative } from './time';
-import { LightVideo } from './types';
+import { LightVideo, Video } from './types';
 
 const toFixedAbsolute = (value: number) => {
     const n = 1;
@@ -21,6 +21,14 @@ export const formatCount = (count: number) => {
     else return count.toString();
 };
 
+export const formatFullVideo = (item: Video) => {
+    item.thumbnail = `https://i.ytimg.com/vi/${item.id}/hqdefault.jpg`;
+    item.views = formatCount(item.views ?? 0) as any;
+    item.date = formatRelative(item.date);
+    item.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    // TODO: Format Tags
+};
+
 export const formatVideo = (item: LightVideo) => {
     item.thumbnail = `https://i.ytimg.com/vi/${item.id}/hqdefault.jpg`;
     item.views = formatCount(item.views ?? 0) as any;
@@ -29,6 +37,6 @@ export const formatVideo = (item: LightVideo) => {
 
 export const formatVideoArray = (array: Array<LightVideo>) => {
     for (const item of array) {
-        formatVideo(item);
+        if (item.id) formatVideo(item);
     }
 };
