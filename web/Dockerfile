@@ -1,8 +1,8 @@
 # Base Image
-FROM node:14
+FROM node:14 as base
 
 # Current Directory Definition
-WORKDIR /usr/src/app
+WORKDIR /home/node/app
 
 # Move Contents To Directory
 COPY . ./
@@ -14,6 +14,8 @@ RUN yarn
 EXPOSE 3000
 ENV HOST=0.0.0.0
 ENV PORT=3000
+
+FROM base as production
 
 # Build and Run Web
 RUN yarn build

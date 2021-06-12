@@ -1,16 +1,14 @@
 # Base Image
-FROM python:3.8.0-buster
+FROM python:3.8.0-buster as base
 
 # Current Directory Definition
-WORKDIR /server
+WORKDIR /home/python/app
 
 # Move Contents To Directory
-ADD . /server
+COPY . ./
 
 # Install Dependencies
-# RUN pip3 install --pre numpy
 RUN pip install --upgrade pip
 RUN pip3 install --no-cache -r requirements.txt
 
-# Start Container
-CMD ["python3", "app.py"]
+COPY . .
