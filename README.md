@@ -1,6 +1,6 @@
 # Clickbait
 
-Clickbait is a project where I will recommend trending YouTube videos to a user. I plan to use a bit of NLP to play around with content-based recommenders.
+Clickbait is a project where I will recommend trending YouTube videos to a user. I plan to use a bit of NLP to play around with content-based recommenders, microservices, Docker, and CI/CD.
 
 ## Technology Overview
 
@@ -9,12 +9,16 @@ It utilizes the following technologies:
 -   Web
     -   VueJS
     -   NuxtJS
--   Server
+-   Recommender
     -   Python
     -   Flask
     -   SciKit Learn
+-   User
+    -   TypeScript
+    -   NodeJS + Express
+    -   PassportJS
 
-All code in this repository is constructed using TypeScript (Vue) and Python. Both are built using Docker, so you will need Docker to run Clickbait.
+All code in this repository is constructed using Vue, Python, and TypeScript with a simple microservice architecture. They are built using Docker, so you will need Docker to run Clickbait. It is also composed together using Nginx.
 
 ## Prerequisites
 
@@ -39,7 +43,7 @@ n 12.20.0
 Set Up Virtual Environment
 
 ```
-cd server
+cd recommender
 virtualenv -p python3 env
 source env/bin/activate
 pip install -r requirements.txt
@@ -47,12 +51,16 @@ pip install -r requirements.txt
 
 Download Data
 
-Please download the `USvideos.csv` from [this link](https://www.kaggle.com/datasnaek/youtube-new?select=USvideos.csv). Rename this file to `raw.csv` and place it in `/server/data`
+Please download the `USvideos.csv` from [this link](https://www.kaggle.com/datasnaek/youtube-new?select=USvideos.csv). Rename this file to `raw.csv` and place it in `/recommender/data`
 
 Preprocess Data
 
 ```
-Please run preprocess.ipynb or preprocess.py to clean the data for the server
+yarn preprocess
+
+OR
+
+Run preprocess.ipynb in recommender/data
 ```
 
 ## Commands
@@ -65,17 +73,17 @@ Run Web (Developer Mode)
 yarn web
 ```
 
-### Server
+### Recommender
 
-Run Server
+Run Recommender
 
 ```
-yarn server
+yarn recommender
 ```
 
 Runs on localhost:5002
 
-Stop Server
+Stop Recommender
 
 When you run the previous command, the last line (before the `✨ Done in xy.zzs.` line) will be a docker_id.
 
@@ -107,7 +115,7 @@ Deactivate Python Environment (if active)
 deactivate
 ```
 
-NOTE: You probably want to run web and server in two seperate terminals. They use hot reloading.
+NOTE: You probably want to run web and recommender in seperate terminals. They use hot reloading.
 
 ## Contributors
 
