@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    user:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: base
+        volumes:
+            - ./src:/home/node/app/src
+            - ./nodemon.json:/home/node/app/nodemon.json
+        container_name: user
+        expose:
+            - '4003'
+        ports:
+            - '4003:4003'
+        command: yarn dev

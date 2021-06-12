@@ -6,7 +6,9 @@
     "scripts": {
         "dev": "nodemon src/index.ts",
         "build": "tsc -p .",
-        "start": "NODE_PATH=./dist node dist/index.js"
+        "start": "NODE_PATH=./dist node dist/index.js",
+        "dev:d": "docker-compose up -d",
+        "build:d": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d"
     },
     "author": "",
     "license": "ISC",
