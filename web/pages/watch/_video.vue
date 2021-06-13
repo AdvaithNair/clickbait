@@ -35,7 +35,7 @@ export default class Watch extends WatchSettings {
         if (!params.video) redirect('/');
 
         // Get Video Data
-        const vid = await axios.get('/api/videos/', {
+        const vid = await axios.get('/api/recommender/videos/', {
             params: { id: params.video },
         });
 
@@ -59,7 +59,7 @@ export default class Watch extends WatchSettings {
         console.log('MOUNTED');
         if (this as any) {
             const id = (this as any).video.id;
-            const recs = await axios.get('/api/videos/recommend', {
+            const recs = await axios.get('/api/recommender/videos/recommend', {
                 params: { id, count: 4 },
             });
 

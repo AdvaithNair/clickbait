@@ -20,20 +20,11 @@ def hello():
 
 
 '''
-Test Route
-'''
-@app.route('/api/user')
-def hello_user():
-    print('Here')
-    return "MAIN Hello"
-
-
-'''
 Get Details for Featured Video
 
 id: ID of featured video
 '''
-@app.route('/api/videos/', methods=['GET'])
+@app.route('/api/recommender/videos', methods=['GET'])
 def get_video():
     video_id = request.args.get('id')
     res = videos.get_video(video_id)
@@ -46,7 +37,7 @@ Gets Similar Videos to Featured Video
 id: ID of featured video
 count: number of videos to get
 '''
-@app.route('/api/videos/recommend', methods=['GET'])
+@app.route('/api/recommender/videos/recommend', methods=['GET'])
 def recommend():
     # video_id = '2kyS6SvSYSE'
     video_id = request.args.get('id')
@@ -65,7 +56,7 @@ Gets Random Videos
 
 num: number of videos to get
 '''
-@app.route('/api/videos/random', methods=['GET'])
+@app.route('/api/recommender/videos/random', methods=['GET'])
 def random_recommend():
     count = request.args.get('num')
     if count is None:

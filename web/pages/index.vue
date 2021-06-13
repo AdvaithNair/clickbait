@@ -29,7 +29,7 @@ Component.registerHooks(['asyncData', 'head']);
 @Component
 export default class Index extends IndexSettings {
     async asyncData() {
-        const res = await axios.get('/api/videos/random');
+        const res = await axios.get('/api/recommender/videos/random');
         console.log('API');
         console.log(res.data);
         formatVideoArray(res.data);
