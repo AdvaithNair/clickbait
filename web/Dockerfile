@@ -19,4 +19,4 @@ FROM base as production
 
 # Build and Run Web
 RUN yarn build
-CMD [ "yarn", "start" ]
+# CMD [ "yarn", "start" ]

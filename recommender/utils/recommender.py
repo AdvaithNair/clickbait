@@ -11,6 +11,7 @@ Gets Full CSV DataSet
 Returns DataFrame of videos dataset
 '''
 def get_data():
+    print("Got Data!")
     # Get Data for Processing
     return pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/processed.csv'))
 
@@ -31,6 +32,7 @@ def combine_tags_and_channel(data):
 
     # Drop Non-Combined Columns for Combined as Output 
     combined_data = combined_data.drop(columns=['tags','channel_title'])
+    print("Combined Tags!")
     return combined_data
 
 
@@ -46,15 +48,18 @@ def transform_data(combined, data):
     # Create Bag of Words Matrix for Tags
     count = CountVectorizer(stop_words='english')
     count_matrix = count.fit_transform(combined['combined'])
+    print("Created BOW!")
 
     # Create TFIDF Matrix for Description
     # Use TFIDF since description words appearing less is more
     tfidf = TfidfVectorizer(stop_words='english')
     tfidf_matrix = tfidf.fit_transform(data['description'].values.astype('U'))
+    print("Created TFIDF!")
 
     # Run Cosine Similarity on Sparse Matrix
     combine_sparse = sp.hstack([count_matrix, tfidf_matrix], format='csr')
     cosine_sim = cosine_similarity(combine_sparse, combine_sparse)
+    print("Created Cosine Similarity!")
     return cosine_sim
 
 
@@ -80,6 +85,7 @@ def recommend_videos(video_id, data, transform, num_recs = 20):
     sim_scores = list(enumerate(transform[index]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:num_recs]
+    print("Created Similarity Matrix!")
     
     # Get Indices of Similar Scores
     recommended_indices = [i[0] for i in sim_scores]
@@ -105,6 +111,7 @@ def recommend_videos(video_id, data, transform, num_recs = 20):
     recommended_data['thumbnail'] = video_thumbnail
     recommended_data['description'] = video_description
     recommended_data['views'] = video_views
+    print("Formatting!")
     return recommended_data
 
 '''

@@ -7,6 +7,7 @@ import utils.secrets as secrets
 import utils.recommender as recommender
 import utils.videos as videos
 
+
 app = Flask(__name__)
 # CORS(app)
 
@@ -30,6 +31,7 @@ id: ID of featured video
 def get_video():
     video_id = request.args.get('id')
     res = videos.get_video(video_id)
+    print("Got Video!")
     return jsonify(res)
 
 
@@ -49,6 +51,7 @@ def recommend():
     else:
         count = int(count)
 
+    print("Getting Ready to Recommend!")
     res = recommender.results(video_id, count)
     return jsonify(res)
 
