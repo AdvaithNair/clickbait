@@ -7,14 +7,17 @@ import utils.secrets as secrets
 import utils.recommender as recommender
 import utils.videos as videos
 
+
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
+
+root = '/api/recommender'
 
 
 '''
 Test Route
 '''
-@app.route('/')
+@app.route(root + '/')
 def hello():
     return secrets.MONGODB_URL
 
@@ -24,10 +27,11 @@ Get Details for Featured Video
 
 id: ID of featured video
 '''
-@app.route('/api/recommender/videos', methods=['GET'])
+@app.route(root + '/videos', methods=['GET'])
 def get_video():
     video_id = request.args.get('id')
     res = videos.get_video(video_id)
+    print("Got Video!")
     return jsonify(res)
 
 
@@ -37,7 +41,7 @@ Gets Similar Videos to Featured Video
 id: ID of featured video
 count: number of videos to get
 '''
-@app.route('/api/recommender/videos/recommend', methods=['GET'])
+@app.route(root + '/videos/recommend', methods=['GET'])
 def recommend():
     # video_id = '2kyS6SvSYSE'
     video_id = request.args.get('id')
@@ -47,6 +51,7 @@ def recommend():
     else:
         count = int(count)
 
+    print("Getting Ready to Recommend!")
     res = recommender.results(video_id, count)
     return jsonify(res)
 
@@ -56,7 +61,7 @@ Gets Random Videos
 
 num: number of videos to get
 '''
-@app.route('/api/recommender/videos/random', methods=['GET'])
+@app.route(root + '/videos/random', methods=['GET'])
 def random_recommend():
     count = request.args.get('num')
     if count is None:

@@ -38,5 +38,6 @@ export const formatVideo = (item: LightVideo) => {
 export const formatVideoArray = (array: Array<LightVideo>) => {
     for (const item of array) {
         if (item.id) formatVideo(item);
+        else console.log(item);
     }
 };

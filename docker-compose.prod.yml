@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+    user:
+        build:
+            target: production
+        command: node dist/index.js
+
+    web:
+        build:
+            target: production
+        command: yarn start

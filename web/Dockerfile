@@ -7,16 +7,16 @@ WORKDIR /home/node/app
 # Move Contents To Directory
 COPY . ./
 
-# Install Dependencies
-RUN yarn
-
 # Prepare for Build
 EXPOSE 3000
 ENV HOST=0.0.0.0
 ENV PORT=3000
 
+# Install Dependencies
+RUN yarn
+
 FROM base as production
 
 # Build and Run Web
 RUN yarn build
-CMD [ "yarn", "start" ]
+# CMD [ "yarn", "start" ]

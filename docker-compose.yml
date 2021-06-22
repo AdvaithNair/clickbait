@@ -22,7 +22,7 @@ services:
         volumes:
             - ./user/src:/home/node/app/src
             - ./user/nodemon.json:/home/node/app/nodemon.json
-        container_name: clickbait-user
+        container_name: clickbait-users
         expose:
             - '4003'
         ports:
@@ -42,6 +42,9 @@ services:
         ports:
             - '3000:3000'
         command: yarn dev
+        depends_on:
+            - recommender
+            - user
 
     nginx:
         image: nginx:latest

@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
     res.json({ hello: 'world3' });
 });
 
-app.get('/api/user/', (req, res) => {
+app.get('/api/users/', (req, res) => {
     res.json({ username: 'gottem' });
 });
 
